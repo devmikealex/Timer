@@ -3,12 +3,26 @@
   margin: 0;
   box-sizing: border-box;
 }
-#root {
-  width: 80vw;
-  height: 50vh;
+body {
+  overflow-x: hidden;
+}
+.test {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+  background-color: cornflowerblue;
+}
+.tools {
+  text-align: center;
+}
+#root {
+  flex-grow: 1;
+  display: flex;
+  align-content: center;
   justify-content: center;
+  flex-wrap: wrap;
   background-color: aquamarine;
 }
 .button {
@@ -20,11 +34,13 @@
 .timer {
   background-color: #dfbcff;
   padding: 10px;
-  margin: 6px;
+  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: fit-content;
+  height: fit-content;
 }
 .timer__timeText {
   font-size: 2rem;
@@ -34,6 +50,8 @@
 }
 .timer__name:focus {
   color: red;
+  background-color: white;
+  padding: 4px;
 }
 .timer__button {
   color: red;

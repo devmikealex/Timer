@@ -31,7 +31,6 @@ export default class Timer {
         this.update()
     }
     delete() {
-        //Todo -----------
         console.log('DELETE timer ID:', this.id);
         this.container.remove()
         window.deleteTimer(this.id)
@@ -63,7 +62,7 @@ function onClickDelete(evnt, item) {
     item.delete()
 }
 
-const setHTML = (a) => {
+function setHTML(a) {
     a.container = document.createElement('div')
     a.container.className = 'timer'
 
@@ -86,6 +85,7 @@ const setHTML = (a) => {
 
     a.buttonDel = document.createElement('button')
     a.buttonDel.className = 'timer__button button timer__button--small'
+    a.buttonDel.dataset.id = a.id
     a.buttonDel.textContent = 'Del'
     a.buttonDel.onclick = (evnt) => onClickDelete(evnt, a)
 

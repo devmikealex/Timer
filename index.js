@@ -1,13 +1,22 @@
 // import {secToText} from "./utils.js"
 import Timer from './Timer.js'
 
+// document.body.addEventListener('click', (e) => {
+//     const tag = e.target.tagName
+//     const id = e.target.dataset.id
+//     console.info('BODY click', tag, 'id:', id)
+//     if (e.target.tagName==='BUTTON' && id) {
+//         console.info('ID:', id)
+//         window.deleteTimer(+id)
+//     }
+// })
+
 const btnSave = document.getElementById('btn-save')
 btnSave.addEventListener('click', saveStorage)
 const btnDelete = document.getElementById('btn-delete')
 btnDelete.addEventListener('click', deleteStorage)
 const btnAddNew = document.getElementById('btn-add-new')
 btnAddNew.addEventListener('click', addNewTimer)
-
 
 let loadTimers = localStorage.getItem('timers')
 let timers = []
@@ -22,9 +31,10 @@ if (loadTimers) {
 } else {
     console.log('Tiemrs CREATE')
     timers.push( new Timer() )
-    timers.push( new Timer('root2', 'test name') )
+    // timers.push( new Timer('root2', 'test name') )
 }
 
+timer()
 setInterval(timer, 1000)
 
 function timer() {

@@ -5,12 +5,34 @@
     margin: 0;
     box-sizing: border-box;
 }
-#root {
-    width: 80vw;
-    height: 50vh;
+body {
+    overflow-x: hidden;
+}
+.test {
     display: flex;
-    align-items: center;
+    // align-content: center;
+    // justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100vw;
+    height: 100vh;
+    background-color:cornflowerblue;
+}
+.tools {
+    // position: fixed;
+    // top: 6px;
+    // left: 6px;
+    // flex-grow: 0;
+    text-align: center;
+}
+#root {
+    // width: 70vw;
+    // height: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-content: center;
     justify-content: center;
+    flex-wrap: wrap;
     background-color: aquamarine;
 }
 .button {
@@ -22,11 +44,13 @@
 .timer {
     background-color: rgb(223, 188, 255);
     padding: 10px;
-    margin: 6px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: fit-content;
+    height: fit-content;
     &__timeText {
         font-size: 2rem;
     }
@@ -34,6 +58,8 @@
         color: white;
         &:focus {
             color: red;
+            background-color: white;
+            padding: 4px;
         }
     }
     &__button {
