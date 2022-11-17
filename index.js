@@ -1,47 +1,59 @@
-// const timeDisplay = document.getElementById('time-display')
-// const btnStart = document.getElementById('btn-start')
-// btnStart.addEventListener('click', btnStartFunc)
-
 // import {secToText} from "./utils.js"
-import Timer from "./Timer.js"
+import Timer from './Timer.js'
 
-const test = new Timer()
-console.log(test)
-console.log(test.secCount)
-test.inc()
-console.log(test.secCount)
-console.log(test.getTimeString())
+const btnSave = document.getElementById('btn-save')
+btnSave.addEventListener('click', saveStorage)
+const btnDelete = document.getElementById('btn-delete')
+btnDelete.addEventListener('click', deleteStorage)
+const btnAddNew = document.getElementById('btn-add-new')
+btnAddNew.addEventListener('click', addNewTimer)
 
-let timers = localStorage.getItem('timers')
-if (!timers) {
-    timers = [
-        {
-            startTime: new Date(),
-            pause: false,
-            secCount: 0,
-        },
-    ]
+
+let loadTimers = localStorage.getItem('timers')
+let timers = []
+
+if (loadTimers) {
+    console.log('Tiemrs LOAD')
+    loadTimers = JSON.parse(loadTimers)
+    loadTimers.forEach(e => {
+        console.log("🚀 forEach", e)
+        timers.push( new Timer(e.root, e.name, e.startTime, e.pause, e.secCount) )
+    });
+} else {
+    console.log('Tiemrs CREATE')
+    timers.push( new Timer() )
+    timers.push( new Timer('root2', 'test name') )
 }
-// function createTimerDIV() {}
 
-// secToText(10)
-// secToText(100)
-// secToText(1000)
-// secToText(10000)
-// secToText(100000)
-// secToText(1000000)
+setInterval(timer, 1000)
 
-// setTimeout(timer, 100)
+function timer() {
+    timers.forEach(e => {
+        e.update()
+    });
+}
 
-// function btnStartFunc() {
-//     startTime = new Date()
-//     setInterval(timer, 1000)
-//     btnStart.textContent = 'Pause'
-//     localStorage.setItem('startTime', startTime);
-// }
+function saveStorage() {
+    console.info('FUNC save')
+    const a = timers.map(e => e.save())
+    console.log('SAVE', a);
+    localStorage.setItem('timers', JSON.stringify(a));
+    // return a
+}
 
-// function timer() {
-//     const newTime = new Date()
-//     const sec = Math.floor((newTime.getTime() - startTime.getTime()) / 1000)
-//     timeDisplay.textContent = secToText(sec)
-// }
+function deleteStorage() {
+    console.info('FUNC deleteStorage')
+    localStorage.removeItem('timers');
+}
+
+function addNewTimer() {
+    timers.push( new Timer() )
+}
+
+window.deleteTimer = function (id) {
+    console.info('FUNC deleteTimer ID:', id)
+    timers = timers.filter ((e) => {
+        return e.id !== id
+    })
+    console.log("timers", timers)
+}

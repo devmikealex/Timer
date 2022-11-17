@@ -7,17 +7,26 @@ function secToText(seconds) {
     let hrsString = '',
         daysString = ''
     if (hrs) {
-        hrsString = String(hrs).padStart(2, '0') + ' : '
+        hrsString = String(hrs).padStart(2, '0') + ':'
     }
     if (days) {
-        daysString = String(days).padStart(2, '0') + ' : '
+        daysString = String(days).padStart(2, '0') + ':'
     }
-    const out = `${daysString}${hrsString}${String(min).padStart(2, '0')} : ${String(
+    const out = `${daysString}${hrsString}${String(min).padStart(2, '0')}:${String(
         sec
     ).padStart(2, '0')}`
 
-    console.info(`FUNC secToText(${seconds}):`, out)
+    // console.info(`FUNC secToText(${seconds}):`, out)
     return out
 }
 
-export default {secToText}
+function *getID() {
+    let id = 0
+    while (1) {
+        id++
+        yield id
+    }
+}
+const genGetID = getID()
+
+export default { secToText, genGetID }
