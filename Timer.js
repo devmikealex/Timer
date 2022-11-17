@@ -2,55 +2,66 @@ import Utils from './utils.js'
 const { secToText, genGetID } = Utils
 
 export default class Timer {
-    constructor(
-        root = 'root',
-        name = 'none',
-        startTime = new Date(),
-        pause = false,
-        secCount = 0
-    ) {
-        this.root = root
-        this.name = name
-        if (typeof startTime === 'string') {
-            this.startTime = new Date(startTime)
+    constructor(obj = {}) {
+        console.log('NEW Timer input:', obj)
+        obj.root = obj.root ?? 'root'
+        obj.name = obj.name ?? 'none'
+        obj.pause = obj.pause ?? false
+        obj.secCount = obj.secCount ?? 0
+        obj.forward = obj.forward ?? true
+        if (typeof obj.startTime === 'string') {
+            obj.startTime = new Date(obj.startTime)
         } else {
-            this.startTime = startTime
+            obj.startTime = new Date()
         }
-        this.pause = pause
-        this.secCount = secCount
+        obj.endTimeSec = obj.endTimeSec ?? 0
+        this.obj = obj
         this.id = genGetID.next().value
-
         setHTML(this)
-        console.log(this)
+        console.log('NEW Timer:', this)
     }
     update() {
-        this.timeText.textContent = this.getTimeString()
+        if (this.obj.forward) {
+            this.timeText.textContent = this.getTimeString()
+        } else {
+            this.timeText.textContent = this.getTimeStringBack()
+        }
     }
     reset() {
-        this.startTime = new Date()
+        this.obj.startTime = new Date()
         this.update()
     }
     delete() {
-        console.log('DELETE timer ID:', this.id);
+        console.log('DELETE timer ID:', this.id)
         this.container.remove()
         window.deleteTimer(this.id)
     }
     save() {
-        return {
-            root: this.root,
-            name: this.name,
-            startTime: this.startTime,
-            pause: this.pause,
-            secCount: this.secCount,
-        }
+        return this.obj
     }
     inc(inc = 1) {
-        this.secCount += inc
+        this.obj.secCount += inc
     }
     getTimeString() {
         const newTime = new Date()
-        const sec = Math.floor((newTime.getTime() - this.startTime.getTime()) / 1000)
+        const sec = Math.floor((newTime.getTime() - this.obj.startTime.getTime()) / 1000)
         return secToText(sec)
+    }
+    getTimeStringBack() {
+        const newTime = new Date()
+        const sec = Math.floor(
+            (this.obj.startTime.getTime() +
+                this.obj.endTimeSec * 1000 -
+                newTime.getTime()) /
+                1000
+        )
+        if (sec > 0) {
+            this.container.classList.remove("timer--mod-final")
+            return secToText(sec)
+        }else{
+            this.container.classList.add("timer--mod-final")
+            return '00:00'
+        }
     }
 }
 
@@ -64,14 +75,14 @@ function onClickDelete(evnt, item) {
 
 function setHTML(a) {
     a.container = document.createElement('div')
-    a.container.className = 'timer'
+    a.container.className = 'timer' + (a.obj.forward ? '' : ' timer--mod')
 
     a.text = document.createElement('div')
     a.text.className = 'timer__name'
-    a.text.textContent = a.name
+    a.text.textContent = a.obj.name
     a.text.contentEditable = true
     a.text.addEventListener('input', function () {
-        a.name = this.textContent
+        a.obj.name = this.textContent
     })
 
     a.timeText = document.createElement('div')
@@ -93,5 +104,5 @@ function setHTML(a) {
     a.container.appendChild(a.timeText)
     a.container.appendChild(a.button)
     a.container.appendChild(a.buttonDel)
-    document.getElementById(a.root).appendChild(a.container)
+    document.getElementById(a.obj.root).appendChild(a.container)
 }

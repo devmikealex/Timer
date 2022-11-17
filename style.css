@@ -42,6 +42,12 @@ body {
   width: fit-content;
   height: fit-content;
 }
+.timer--mod {
+  background-color: #ffb6b6;
+}
+.timer--mod-final {
+  background-color: #ff5e8b;
+}
 .timer__timeText {
   font-size: 2rem;
 }

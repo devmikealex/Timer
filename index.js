@@ -16,7 +16,9 @@ btnSave.addEventListener('click', saveStorage)
 const btnDelete = document.getElementById('btn-delete')
 btnDelete.addEventListener('click', deleteStorage)
 const btnAddNew = document.getElementById('btn-add-new')
-btnAddNew.addEventListener('click', addNewTimer)
+btnAddNew.addEventListener('click', addNew)
+const btnAddNewTimer = document.getElementById('btn-add-new-timer')
+btnAddNewTimer.addEventListener('click', addNewTimer)
 
 let loadTimers = localStorage.getItem('timers')
 let timers = []
@@ -26,7 +28,8 @@ if (loadTimers) {
     loadTimers = JSON.parse(loadTimers)
     loadTimers.forEach(e => {
         console.log("🚀 forEach", e)
-        timers.push( new Timer(e.root, e.name, e.startTime, e.pause, e.secCount) )
+        // timers.push( new Timer(e.root, e.name, e.startTime, e.pause, e.secCount, e.forward) )
+        timers.push( new Timer(e) )
     });
 } else {
     console.log('Tiemrs CREATE')
@@ -56,8 +59,12 @@ function deleteStorage() {
     localStorage.removeItem('timers');
 }
 
-function addNewTimer() {
+function addNew() {
     timers.push( new Timer() )
+}
+
+function addNewTimer() {
+    timers.push( new Timer({forward: false, endTimeSec: 5}) )
 }
 
 window.deleteTimer = function (id) {
