@@ -14,3 +14,4 @@
 - CSS / LESS / BEM
 - Flexbox
 - ООП / классы
+- JSDoc

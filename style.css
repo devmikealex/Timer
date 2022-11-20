@@ -25,11 +25,19 @@ body {
   flex-wrap: wrap;
   background-color: aquamarine;
 }
+.clock {
+  text-align: center;
+  color: white;
+  padding: 6px;
+}
 .button {
   background-color: chartreuse;
   border: none;
   padding: 4px 15px;
   cursor: pointer;
+}
+.button:hover {
+  background-color: cyan;
 }
 .timer {
   background-color: #dfbcff;

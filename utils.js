@@ -1,3 +1,8 @@
+/**
+ * Конвертирует секунды в привычный вид времени
+ * @param {number} seconds Количество секунд
+ * @returns {string} Строка вида '00:00'
+ */
 function secToText(seconds) {
     const sec = seconds % 60
     const min = ~~(seconds / 60) % 60
@@ -20,6 +25,10 @@ function secToText(seconds) {
     return out
 }
 
+/**
+ * Генератор уникального (в рамках запуска) индентификатора
+ * @returns {number}
+ */
 function *getID() {
     let id = 0
     while (1) {
@@ -27,6 +36,11 @@ function *getID() {
         yield id
     }
 }
+/**
+ * Генератор уникального (в рамках запуска) индентификатора
+ * @example genGetID()
+ * @returns {number}
+ */
 const genGetID = getID()
 
 export default { secToText, genGetID }

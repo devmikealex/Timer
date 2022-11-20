@@ -1,0 +1,1 @@
+[javascript - Passing object with predefined props to class constructor es6 - Stack Overflow](https://stackoverflow.com/questions/35675275/passing-object-with-predefined-props-to-class-constructor-es6)
