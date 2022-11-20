@@ -12,10 +12,12 @@ function secToText(seconds) {
     let hrsString = '',
         daysString = ''
     if (hrs) {
-        hrsString = String(hrs).padStart(2, '0') + ':'
+        // hrsString = String(hrs).padStart(2, '0') + ':'
+        hrsString = hrs + ':'
     }
     if (days) {
-        daysString = String(days).padStart(2, '0') + ':'
+        // daysString = String(days).padStart(2, '0') + ':'
+        daysString = days + ':'
     }
     const out = `${daysString}${hrsString}${String(min).padStart(2, '0')}:${String(
         sec

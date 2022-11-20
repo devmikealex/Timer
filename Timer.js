@@ -136,8 +136,8 @@ function setHTML(a) {
     a.buttonDel.textContent = 'Del'
     a.buttonDel.onclick = (evnt) => onClickDelete(evnt, a)
 
-    a.container.appendChild(a.timeText)
     a.container.appendChild(a.text)
+    a.container.appendChild(a.timeText)
     a.container.appendChild(a.timeStartText)
 
     a.container.appendChild(a.btnContainer)

@@ -8,7 +8,7 @@
 body {
     overflow-x: hidden;
 }
-.test {
+.container {
     display: flex;
     // align-content: center;
     // justify-content: center;
@@ -16,7 +16,7 @@ body {
     align-items: stretch;
     width: 100vw;
     height: 100vh;
-    background-color:cornflowerblue;
+    background-color: #313131;
 }
 .tools {
     // position: fixed;
@@ -33,7 +33,7 @@ body {
     align-content: center;
     justify-content: center;
     flex-wrap: wrap;
-    background-color: aquamarine;
+    background-color: #474747;
 }
 .clock {
     text-align: center;
@@ -41,17 +41,19 @@ body {
     padding: 6px;
 }
 .button {
-    background-color: chartreuse;
+    background-color: rgb(91, 129, 53);
+    color: white;
     border: none;
     padding: 4px 15px;
+    margin: 2px;
     cursor: pointer;
     &:hover {
         background-color: cyan;
     }
 }
 .timer {
-    background-color: rgb(223, 188, 255);
-    padding: 10px;
+    background-color: white;
+    // padding: 10px;
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -59,31 +61,57 @@ body {
     justify-content: center;
     width: fit-content;
     height: fit-content;
+    border-radius: 14px;
+    box-shadow: 0px 6px 16px -3px rgba(0, 0, 0, 0.7);
     &--mod {
-        background-color: rgb(255, 182, 182);
+        background-color: rgb(255, 207, 207);
         &-final {
-            background-color: rgb(255, 94, 139);
+            background-color: rgb(255, 135, 135);
         }
     }
     &__timeText {
         font-size: 2rem;
+        font-family: 'Consolas', Courier, monospace;
+        padding: 0;
+        margin: 0 0.6rem
     }
     &__name {
-        color: white;
+        color: rgb(137, 137, 137);
+        margin-top: 4px;
         &:focus {
             color: red;
             background-color: white;
             padding: 4px;
         }
     }
+    &__startTime {
+        color: #848484;
+        margin-bottom: 4px;
+    }
+    &__buttons {
+        width: 100%;
+        background-color: rgb(37, 170, 55);
+        text-align: center;
+        padding: 6px;
+        border-radius: 0 0 14px 14px;
+    }
+    &--mod &__name,
+    // &--mod-final &__name,
+    &--mod &__startTime {
+    // &--mod-final &__startTime {
+        color: rgb(45, 45, 45);
+    }
+    &--mod &__buttons {
+        background-color:rgb(228, 57, 48);
+    }
     &__button {
-        color: red;
-        padding: 8px 20px;
+        color: white;
+        padding: 2px 6px;
         &--small {
             background-color: red;
-            color: white;
-            padding: 3px 3px;
-            margin-top: 4px;
+            // color: white;
+            // padding: 3px 3px;
+            // margin-top: 4px;
         }
     }
 }

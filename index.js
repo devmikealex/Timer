@@ -27,7 +27,7 @@ btnAddNewTimer.addEventListener('click', () => addNewTimer())
 let loadTimers = localStorage.getItem('timers')
 let timers = []
 
-timers.push(new Timer({name: 'Default'}))
+timers.push(new Timer({name: 'LOAD'}))
 
 if (loadTimers) {
     console.log('Timers LOAD')
