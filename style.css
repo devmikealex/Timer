@@ -25,10 +25,17 @@ body {
   flex-wrap: wrap;
   background-color: #474747;
 }
-.clock {
+.date-clock {
   text-align: center;
-  color: white;
   padding: 6px;
+}
+#clock {
+  color: white;
+  font-size: 1.3rem;
+}
+#date {
+  color: #cacaca;
+  font-size: 1.1rem;
 }
 .button {
   background-color: #5b8135;

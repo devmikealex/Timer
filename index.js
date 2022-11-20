@@ -14,6 +14,8 @@ const { secToText } = Utils
 
 const tools = document.getElementById('tools')
 const clock = document.getElementById('clock')
+const date = document.getElementById('date')
+const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
 const btnSave = document.getElementById('btn-save')
 btnSave.addEventListener('click', saveStorage)
@@ -57,7 +59,9 @@ timer()
 setInterval(timer, 1000)
 
 function timer() {
-    clock.textContent=(new Date()).toTimeString().slice(0,5)
+    const noew = new Date()
+    clock.textContent = noew.toTimeString().slice(0,5) + ' '
+    date.textContent = noew.toLocaleDateString('ru', dateOptions)
     timers.forEach((e) => {
         e.update()
     })
