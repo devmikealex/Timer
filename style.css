@@ -39,7 +39,7 @@ body {
   cursor: pointer;
 }
 .button:hover {
-  background-color: cyan;
+  background-color: #006161;
 }
 .timer {
   background-color: white;
@@ -95,6 +95,8 @@ body {
 .timer__button {
   color: white;
   padding: 2px 6px;
+  background-color: unset;
+  border-radius: 4px;
 }
 .timer__button--small {
   background-color: red;
