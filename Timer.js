@@ -38,6 +38,12 @@ export default class Timer {
         if (obj.forward) {
             const mainStartTime = obj.startTime
             this.timeStartText.textContent = `${mainStartTime.getHours()}:${String(mainStartTime.getMinutes()).padStart(2, '0')}`
+            const today = (new Date()).toDateString()
+            const startDay = mainStartTime.toDateString()
+            if (today !== startDay) {
+                const options = { month: 'long', day: 'numeric' };
+                this.timeStartText.textContent += ' - ' + mainStartTime.toLocaleDateString('ru-RU', options)
+            }
         } else {
             this.timeStartText.textContent = secToText(obj.endTimeSec)
         }
