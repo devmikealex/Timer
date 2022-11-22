@@ -26,6 +26,13 @@ body {
     margin: 2px;
     border-radius: 8px;
     cursor: pointer;
+    &__icon {
+        width: 20px;
+        position: relative;
+        top: 3px;
+        right: 4px;
+        // filter: invert(100%);
+    }
     &:hover {
         background-color: rgb(3, 94, 137);
     }
@@ -101,12 +108,16 @@ body {
         @{self}__startTime {
             color: rgb(45, 45, 45);
         }
+        @{self}__button--small {
+            background-color: rgb(23, 96, 214);
+        }
     }
     &__timeText {
         font-size: 2rem;
         font-family: 'Consolas', Courier, monospace;
         padding: 0;
-        margin: 0 1rem
+        margin: 0 1rem;
+        // line-height: 0.9em;
     }
     &__name {
         color: rgb(137, 137, 137);
@@ -122,7 +133,8 @@ body {
     }
     &__startTime {
         color: #848484;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+        margin-top: 3px;
     }
     &__buttons {
         width: 100%;
@@ -148,7 +160,10 @@ body {
         font-size: 0.7rem;
         line-height: 0.8rem;
         &--small {
-            background-color: red;
+            background-color: rgb(246, 47, 47);
+            border-radius: 20px;
+            width: 32px;
+            height: 32px;
             // color: white;
             // padding: 3px 3px;
             // margin-top: 4px;

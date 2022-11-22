@@ -61,21 +61,23 @@ export default class Timer {
         this.obj.startTime = new Date()
         this.update()
     }
-    focus() {
+    focusName() {
         this.text.focus()
-        let sel, range
-        // todo -------------
-        if (window.getSelection && document.createRange) {
-            range = document.createRange();
-            range.selectNodeContents(this.text);
-            sel = window.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-        } else if (document.body.createTextRange) {
-            range = document.body.createTextRange();
-            range.moveToElementText(this.text);
-            range.select();
-        }
+        window.getSelection().removeAllRanges()
+        window.getSelection().selectAllChildren(this.text)
+        
+        // let sel, range
+        // if (window.getSelection && document.createRange) {
+        //     range = document.createRange();
+        //     range.selectNodeContents(this.text);
+        //     sel = window.getSelection();
+        //     sel.removeAllRanges();
+        //     sel.addRange(range);
+        // } else if (document.body.createTextRange) {
+        //     range = document.body.createTextRange();
+        //     range.moveToElementText(this.text);
+        //     range.select();
+        // }
     }
     delete() {
         console.log('DELETE timer ID:', this.id)
@@ -140,8 +142,14 @@ function setHTML(a) {
     a.text.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {
             console.info('-ENTER-')
+            window.getSelection().removeAllRanges()
             e.target.blur()
         }
+    })
+    
+    a.text.addEventListener('blur', function() {
+        console.info('-blur-')
+        a.obj.name = a.text.textContent
     })
 
     a.timeText = document.createElement('div')
@@ -161,15 +169,16 @@ function setHTML(a) {
     a.button.onclick = (evnt) => onClickReset(evnt, a)
 
     const img1 = document.createElement('img')
-    img1.src='https://upload.wikimedia.org/wikipedia/commons/f/f6/Swiss_National_Park_131.JPG'
-    img1.width='25'
+    img1.src='./images/reset.png'
+    // img1.width='20'
+    img1.className='button__icon'
     // a.button.prepend(document.createElement('br'))
     a.button.prepend(img1)
 
     a.buttonDel = document.createElement('button')
     a.buttonDel.className = 'timer__button button timer__button--small'
     a.buttonDel.dataset.id = a.id
-    a.buttonDel.textContent = 'X'
+    a.buttonDel.innerHTML = '&#10006;'
     a.buttonDel.onclick = (evnt) => onClickDelete(evnt, a)
 
     a.container.appendChild(a.text)

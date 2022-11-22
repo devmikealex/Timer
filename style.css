@@ -23,6 +23,12 @@ body {
   border-radius: 8px;
   cursor: pointer;
 }
+.button__icon {
+  width: 20px;
+  position: relative;
+  top: 3px;
+  right: 4px;
+}
 .button:hover {
   background-color: #035e89;
 }
@@ -89,6 +95,9 @@ body {
 .timer--mod .timer__startTime {
   color: #2d2d2d;
 }
+.timer--mod .timer__button--small {
+  background-color: #1760d6;
+}
 .timer__timeText {
   font-size: 2rem;
   font-family: 'Consolas', Courier, monospace;
@@ -108,7 +117,8 @@ body {
 }
 .timer__startTime {
   color: #848484;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  margin-top: 3px;
 }
 .timer__buttons {
   width: 100%;
@@ -129,5 +139,8 @@ body {
   line-height: 0.8rem;
 }
 .timer__button--small {
-  background-color: red;
+  background-color: #f62f2f;
+  border-radius: 20px;
+  width: 32px;
+  height: 32px;
 }

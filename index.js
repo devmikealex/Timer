@@ -83,7 +83,7 @@ function deleteStorage() {
 function addNew() {
     const newItem = new Timer()
     timers.push(newItem)
-    newItem.focus()
+    newItem.focusName()
 }
 
 function addNewTimer(sec = 5) {
