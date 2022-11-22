@@ -45,9 +45,9 @@ if (loadTimers) {
     // timers.push( new Timer('root2', 'test name') )
 }
 
-for (let i = 10; i < 200; i += 10) {
+for (let i = 10; i < 190; i += 10) {
     const btn = document.createElement('button')
-    btn.className = 'button'
+    btn.className = 'button tools__button--mod'
     btn.dataset.sec = i * 60
     const temp = secToText(i * 60)
     btn.textContent = `${temp.substring(0, temp.length - 3)}m`
@@ -81,7 +81,9 @@ function deleteStorage() {
 }
 
 function addNew() {
-    timers.push(new Timer())
+    const newItem = new Timer()
+    timers.push(newItem)
+    newItem.focus()
 }
 
 function addNewTimer(sec = 5) {

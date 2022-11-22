@@ -14,8 +14,38 @@ body {
   height: 100vh;
   background-color: #313131;
 }
+.button {
+  background-color: #0a80b7;
+  color: white;
+  border: none;
+  padding: 4px 15px;
+  margin: 2px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #035e89;
+}
 .tools {
+  font-size: 0;
   text-align: center;
+  max-width: 510px;
+  margin: auto;
+}
+.tools__button {
+  font-size: 1.15rem;
+  padding: 6px 20px;
+  background-color: #25aa37;
+}
+.tools__button:hover {
+  background-color: #078b19;
+}
+.tools__button--mod {
+  width: 80px;
+  background-color: #6a6a6a;
+}
+.tools__button--mod:hover {
+  background-color: #595959;
 }
 #root {
   flex-grow: 1;
@@ -37,17 +67,6 @@ body {
   color: #cacaca;
   font-size: 1.1rem;
 }
-.button {
-  background-color: #5b8135;
-  color: white;
-  border: none;
-  padding: 4px 15px;
-  margin: 2px;
-  cursor: pointer;
-}
-.button:hover {
-  background-color: #006161;
-}
 .timer {
   background-color: white;
   margin: 10px;
@@ -66,20 +85,26 @@ body {
 .timer--mod-final {
   background-color: #ff8787;
 }
+.timer--mod .timer__name,
+.timer--mod .timer__startTime {
+  color: #2d2d2d;
+}
 .timer__timeText {
   font-size: 2rem;
   font-family: 'Consolas', Courier, monospace;
   padding: 0;
-  margin: 0 0.6rem;
+  margin: 0 1rem;
 }
 .timer__name {
   color: #898989;
-  margin-top: 4px;
+  margin: 5px;
+  margin-bottom: 0;
+  padding: 2px;
+  border-radius: 2px;
 }
 .timer__name:focus {
-  color: red;
-  background-color: white;
-  padding: 4px;
+  color: #b70000;
+  background-color: #efefef;
 }
 .timer__startTime {
   color: #848484;
@@ -92,18 +117,16 @@ body {
   padding: 6px;
   border-radius: 0 0 14px 14px;
 }
-.timer--mod .timer__name,
-.timer--mod .timer__startTime {
-  color: #2d2d2d;
-}
 .timer--mod .timer__buttons {
   background-color: #e43930;
 }
 .timer__button {
   color: white;
-  padding: 2px 6px;
+  padding: 4px 8px;
   background-color: unset;
   border-radius: 4px;
+  font-size: 0.7rem;
+  line-height: 0.8rem;
 }
 .timer__button--small {
   background-color: red;

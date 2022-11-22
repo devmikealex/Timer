@@ -21,7 +21,7 @@ export default class Timer {
     constructor(obj = {}) {
         console.log('NEW Timer input:', obj)
         obj.root = obj.root ?? 'root'
-        obj.name = obj.name ?? 'none'
+        obj.name = obj.name ?? 'Name'
         obj.pause = obj.pause ?? false
         obj.secCount = obj.secCount ?? 0
         if (typeof obj.startTime === 'string') {
@@ -60,6 +60,22 @@ export default class Timer {
     reset() {
         this.obj.startTime = new Date()
         this.update()
+    }
+    focus() {
+        this.text.focus()
+        let sel, range
+        // todo -------------
+        if (window.getSelection && document.createRange) {
+            range = document.createRange();
+            range.selectNodeContents(this.text);
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+        } else if (document.body.createTextRange) {
+            range = document.body.createTextRange();
+            range.moveToElementText(this.text);
+            range.select();
+        }
     }
     delete() {
         console.log('DELETE timer ID:', this.id)
@@ -108,6 +124,10 @@ function onClickDelete(evnt, item) {
     item.delete()
 }
 
+/**
+ * Создание HTML элементов для таймера
+ * @param {object} a Объект для хранения новых элементов HTML
+ */
 function setHTML(a) {
     a.container = document.createElement('div')
     a.container.className = 'timer' + (a.obj.forward ? '' : ' timer--mod')
@@ -116,8 +136,12 @@ function setHTML(a) {
     a.text.className = 'timer__name'
     a.text.textContent = a.obj.name
     a.text.contentEditable = true
-    a.text.addEventListener('input', function () {
-        a.obj.name = this.textContent
+
+    a.text.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            console.info('-ENTER-')
+            e.target.blur()
+        }
     })
 
     a.timeText = document.createElement('div')
@@ -136,10 +160,16 @@ function setHTML(a) {
     a.button.textContent = 'Reset'
     a.button.onclick = (evnt) => onClickReset(evnt, a)
 
+    const img1 = document.createElement('img')
+    img1.src='https://upload.wikimedia.org/wikipedia/commons/f/f6/Swiss_National_Park_131.JPG'
+    img1.width='25'
+    // a.button.prepend(document.createElement('br'))
+    a.button.prepend(img1)
+
     a.buttonDel = document.createElement('button')
     a.buttonDel.className = 'timer__button button timer__button--small'
     a.buttonDel.dataset.id = a.id
-    a.buttonDel.textContent = 'Del'
+    a.buttonDel.textContent = 'X'
     a.buttonDel.onclick = (evnt) => onClickDelete(evnt, a)
 
     a.container.appendChild(a.text)
