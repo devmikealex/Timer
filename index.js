@@ -27,6 +27,12 @@ const btnAddNewTimer = document.getElementById('btn-add-new-timer')
 btnAddNewTimer.addEventListener('click', () => addNewTimer())
 
 const inpTimecode = document.getElementById('inp-timecode')
+inpTimecode.addEventListener('keyup', (e) => {
+    if (e.key === 'Enter') {
+        console.info('-ENTER-')
+        addNewTimer(textToSec(inpTimecode.value))
+    }
+})
 const btnAddNewTimecode = document.getElementById('btn-add-new-timecode')
 btnAddNewTimecode.addEventListener('click', () =>
     addNewTimer(textToSec(inpTimecode.value))
