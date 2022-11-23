@@ -18,7 +18,7 @@ const date = document.getElementById('date')
 const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
 
 const btnSave = document.getElementById('btn-save')
-btnSave.addEventListener('click', saveStorage)
+btnSave.addEventListener('click', (e) => saveStorage(e))
 const btnDelete = document.getElementById('btn-delete')
 btnDelete.addEventListener('click', deleteStorage)
 const btnAddNew = document.getElementById('btn-add-new')
@@ -28,12 +28,14 @@ btnAddNewTimer.addEventListener('click', () => addNewTimer())
 
 const inpTimecode = document.getElementById('inp-timecode')
 const btnAddNewTimecode = document.getElementById('btn-add-new-timecode')
-btnAddNewTimecode.addEventListener('click', () => addNewTimer(textToSec(inpTimecode.value)))
+btnAddNewTimecode.addEventListener('click', () =>
+    addNewTimer(textToSec(inpTimecode.value))
+)
 
 let loadTimers = localStorage.getItem('timers')
 let timers = []
 
-timers.push(new Timer({name: 'LOAD'}))
+timers.push(new Timer({ name: 'LOAD' }))
 
 if (loadTimers) {
     console.log('Timers LOAD')
@@ -69,23 +71,45 @@ setInterval(timer, 1000)
 
 function timer() {
     const noew = new Date()
-    clock.textContent = noew.toTimeString().slice(0,5) + ' '
+    clock.textContent = noew.toTimeString().slice(0, 5) + ' '
     date.textContent = noew.toLocaleDateString('ru', dateOptions)
     timers.forEach((e) => {
         e.update()
     })
-    const time = document.querySelector('div.timer:nth-child(1) > div:nth-child(2)').textContent
-    const name = document.querySelector('div.timer:nth-child(1) > div:nth-child(1)').textContent
+    const time = document.querySelector(
+        'div.timer:nth-child(1) > div:nth-child(2)'
+    ).textContent
+    const name = document.querySelector(
+        'div.timer:nth-child(1) > div:nth-child(1)'
+    ).textContent
     document.title = `${time} ${name} - Timer`
 }
-
-function saveStorage() {
+/**
+ * Сохранить настрйоки таймеров.
+ * @param {event} event
+ * @param {boolean} copy - false в localStorage / true в буфер обмена
+ */
+function saveStorage(event, copy = false) {
     console.info('FUNC save')
+    const alt = event.getModifierState("Alt")
+    console.info('mod ALT', alt)
     const a0 = timers.filter((e) => e.obj.name !== 'LOAD')
     const a = a0.map((e) => e.save())
     console.log('SAVE', a)
-    localStorage.setItem('timers', JSON.stringify(a))
-    // return a
+    let json = JSON.stringify(a)
+    if (copy || alt) {
+        navigator.clipboard.writeText(json)
+        console.log('SAVE to clipboard')
+    } else {
+        const control = event.getModifierState("Control")
+        console.info('mod control', control)
+        if (control) {
+            console.log('Get data from input for save')
+            json = inpTimecode.value
+        }
+        localStorage.setItem('timers', json)
+        console.log('SAVE to localStorage')
+    }
 }
 
 function deleteStorage() {
@@ -113,9 +137,9 @@ window.deleteTimer = function (id) {
 
 window.moveTimerToTop = function (id) {
     console.info('FUNC moveTimerToTop ID:', id)
-    const index = timers.findIndex( e => e.id === id )
-    const element = timers[index];
-    timers.splice(index, 1);
-    timers.splice(0, 0, element);
+    const index = timers.findIndex((e) => e.id === id)
+    const element = timers[index]
+    timers.splice(index, 1)
+    timers.splice(0, 0, element)
     console.log('timers', timers)
 }
