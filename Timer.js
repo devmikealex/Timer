@@ -1,6 +1,8 @@
 import Utils from './utils.js'
 const { secToText, genGetID } = Utils
 
+const alarmAudio = new Audio('./audio/alarm.mp3')
+
 /**
  * Class for working with a timer
  * @export
@@ -17,6 +19,7 @@ export default class Timer {
      * @param {boolean} [obj.forward] Count direction (stopwatch = true / timer = false)
      * @param {Date} [obj.startTime] Count start time
      * @param {number} [obj.endTimeSec] After how many seconds the timer will end
+     * @param {boolean} [obj.alarmDone] The timer has already worked or not
      */
     constructor(obj = {}) {
         console.log('NEW Timer input:', obj)
@@ -31,18 +34,22 @@ export default class Timer {
         }
         obj.forward = obj.forward ?? true
         obj.endTimeSec = +obj.endTimeSec ?? 0
+        obj.alarmDone = obj.alarmDone ?? false
         // obj.endTimeSec += 1
         this.obj = obj
         this.id = genGetID.next().value
         setHTML(this)
         if (obj.forward) {
             const mainStartTime = obj.startTime
-            this.timeStartText.textContent = `${mainStartTime.getHours()}:${String(mainStartTime.getMinutes()).padStart(2, '0')}`
-            const today = (new Date()).toDateString()
+            this.timeStartText.textContent = `${mainStartTime.getHours()}:${String(
+                mainStartTime.getMinutes()
+            ).padStart(2, '0')}`
+            const today = new Date().toDateString()
             const startDay = mainStartTime.toDateString()
             if (today !== startDay) {
-                const options = { month: 'long', day: 'numeric' };
-                this.timeStartText.textContent += ' - ' + mainStartTime.toLocaleDateString('ru-RU', options)
+                const options = { month: 'long', day: 'numeric' }
+                this.timeStartText.textContent +=
+                    ' - ' + mainStartTime.toLocaleDateString('ru-RU', options)
             }
         } else {
             this.timeStartText.textContent = secToText(obj.endTimeSec)
@@ -60,12 +67,14 @@ export default class Timer {
     reset() {
         this.obj.startTime = new Date()
         this.update()
+        this.container.classList.remove('timer--mod-final')
+        this.alarmDone = false
     }
     focusName() {
         this.text.focus()
         window.getSelection().removeAllRanges()
         window.getSelection().selectAllChildren(this.text)
-        
+
         // let sel, range
         // if (window.getSelection && document.createRange) {
         //     range = document.createRange();
@@ -107,14 +116,17 @@ export default class Timer {
                 newTime.getTime()) /
                 1000
         )
-        // todo -----------
-        if (sec > 0) {
-            this.container.classList.remove('timer--mod-final')
-            return secToText(sec)
-        } else {
-            this.container.classList.add('timer--mod-final')
-            return '00:00'
+        if (!this.alarmDone) {
+            if (sec > 0) {
+                // this.container.classList.remove('timer--mod-final')
+                return secToText(sec)
+            } else {
+                this.alarmDone = true
+                this.container.classList.add('timer--mod-final')
+                alarmAudio.play()
+            }
         }
+        return '00:00'
     }
 }
 
@@ -127,8 +139,8 @@ function onClickDelete(evnt, item) {
 }
 /**
  * Передвинуть элементв в DOM в первую позицию у родителя
- * @param {event} evnt 
- * @param {object} item 
+ * @param {event} evnt
+ * @param {object} item
  */
 function onClickToTop(evnt, item) {
     item.container.parentElement.prepend(item.container)
@@ -148,15 +160,15 @@ function setHTML(a) {
     a.text.textContent = a.obj.name
     a.text.contentEditable = true
 
-    a.text.addEventListener('keydown', function(e) {
+    a.text.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             console.info('-ENTER-')
             window.getSelection().removeAllRanges()
             e.target.blur()
         }
     })
-    
-    a.text.addEventListener('blur', function() {
+
+    a.text.addEventListener('blur', function () {
         console.info('-blur-')
         a.obj.name = a.text.textContent
     })
@@ -176,10 +188,10 @@ function setHTML(a) {
     a.buttonToTop.className = 'timer__button button'
     a.buttonToTop.textContent = 'Top'
     a.buttonToTop.onclick = (evnt) => onClickToTop(evnt, a)
-    
+
     const img2 = document.createElement('img')
-    img2.src='./images/pin.png'
-    img2.className='button__icon'
+    img2.src = './images/pin.png'
+    img2.className = 'button__icon'
     a.buttonToTop.prepend(img2)
 
     a.button = document.createElement('button')
@@ -188,9 +200,9 @@ function setHTML(a) {
     a.button.onclick = (evnt) => onClickReset(evnt, a)
 
     const img1 = document.createElement('img')
-    img1.src='./images/reset.png'
+    img1.src = './images/reset.png'
     // img1.width='20'
-    img1.className='button__icon'
+    img1.className = 'button__icon'
     // a.button.prepend(document.createElement('br'))
     a.button.prepend(img1)
 

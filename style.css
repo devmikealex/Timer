@@ -101,14 +101,10 @@ input {
 .timer--mod .timer__startTime {
   color: #2d2d2d;
 }
-.timer--mod .timer__button--small {
-  background-color: #1760d6;
-}
 .timer__timeText {
   font-size: 2rem;
   font-family: 'Consolas', Courier, monospace;
-  padding: 0;
-  margin: 0 1rem;
+  margin: 0 2rem;
 }
 .timer__name {
   color: #898989;
@@ -149,7 +145,6 @@ input {
 }
 .timer__button--small {
   padding: 2px 4px;
-  background-color: #f62f2f;
   border-radius: 20px;
   width: 28px;
   height: 28px;

@@ -81,7 +81,8 @@ function timer() {
 
 function saveStorage() {
     console.info('FUNC save')
-    const a = timers.map((e) => e.save())
+    const a0 = timers.filter((e) => e.obj.name !== 'LOAD')
+    const a = a0.map((e) => e.save())
     console.log('SAVE', a)
     localStorage.setItem('timers', JSON.stringify(a))
     // return a
