@@ -138,15 +138,19 @@ input {
 }
 .timer__button {
   color: white;
-  padding: 4px 8px;
+  padding: 3px 8px 8px 12px;
   background-color: unset;
   border-radius: 4px;
   font-size: 0.7rem;
   line-height: 0.8rem;
 }
+.timer__button:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
 .timer__button--small {
+  padding: 2px 4px;
   background-color: #f62f2f;
   border-radius: 20px;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }

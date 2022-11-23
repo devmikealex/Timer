@@ -109,3 +109,12 @@ window.deleteTimer = function (id) {
     })
     console.log('timers', timers)
 }
+
+window.moveTimerToTop = function (id) {
+    console.info('FUNC moveTimerToTop ID:', id)
+    const index = timers.findIndex( e => e.id === id )
+    const element = timers[index];
+    timers.splice(index, 1);
+    timers.splice(0, 0, element);
+    console.log('timers', timers)
+}

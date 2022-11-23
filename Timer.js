@@ -125,6 +125,15 @@ function onClickReset(evnt, item) {
 function onClickDelete(evnt, item) {
     item.delete()
 }
+/**
+ * Передвинуть элементв в DOM в первую позицию у родителя
+ * @param {event} evnt 
+ * @param {object} item 
+ */
+function onClickToTop(evnt, item) {
+    item.container.parentElement.prepend(item.container)
+    window.moveTimerToTop(item.id)
+}
 
 /**
  * Создание HTML элементов для таймера
@@ -163,6 +172,16 @@ function setHTML(a) {
     a.btnContainer = document.createElement('div')
     a.btnContainer.className = 'timer__buttons'
 
+    a.buttonToTop = document.createElement('button')
+    a.buttonToTop.className = 'timer__button button'
+    a.buttonToTop.textContent = 'Top'
+    a.buttonToTop.onclick = (evnt) => onClickToTop(evnt, a)
+    
+    const img2 = document.createElement('img')
+    img2.src='./images/pin.png'
+    img2.className='button__icon'
+    a.buttonToTop.prepend(img2)
+
     a.button = document.createElement('button')
     a.button.className = 'timer__button button'
     a.button.textContent = 'Reset'
@@ -186,6 +205,7 @@ function setHTML(a) {
     a.container.appendChild(a.timeStartText)
 
     a.container.appendChild(a.btnContainer)
+    a.btnContainer.appendChild(a.buttonToTop)
     a.btnContainer.appendChild(a.button)
     a.btnContainer.appendChild(a.buttonDel)
     document.getElementById(a.obj.root).appendChild(a.container)
