@@ -130,7 +130,9 @@ function addNew() {
 }
 
 function addNewTimer(sec = 5) {
-    timers.push(new Timer({ forward: false, endTimeSec: sec }))
+    const newItem = new Timer({ forward: false, endTimeSec: sec })
+    timers.push(newItem)
+    newItem.focusName()
 }
 
 window.deleteTimer = function (id) {
