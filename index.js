@@ -93,8 +93,8 @@ function saveStorage(event, copy = false) {
     console.info('FUNC save')
     const alt = event.getModifierState("Alt")
     console.info('mod ALT', alt)
-    const a0 = timers.filter((e) => e.obj.name !== 'LOAD')
-    const a = a0.map((e) => e.save())
+    const t_filterd = timers.filter((e) => e.obj.name !== 'LOAD')
+    const a = t_filterd.map((e) => e.save())
     console.log('SAVE', a)
     let json = JSON.stringify(a)
     if (copy || alt) {

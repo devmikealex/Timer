@@ -64,6 +64,10 @@ export default class Timer {
             this.timeText.textContent = this.getTimeStringBack()
         }
     }
+    rename (newName) {
+        this.obj.name = newName
+        this.container.classList.remove('timer--load')
+    }
     reset() {
         this.obj.startTime = new Date()
         this.update()
@@ -153,7 +157,14 @@ function onClickToTop(evnt, item) {
  */
 function setHTML(a) {
     a.container = document.createElement('div')
-    a.container.className = 'timer' + (a.obj.forward ? '' : ' timer--mod')
+    let modClass = ''
+    if (a.obj.name==='LOAD') {
+        modClass = ' timer--load'
+    }
+    if (!a.obj.forward) {
+        modClass += ' timer--mod'
+    }
+    a.container.className = 'timer' + modClass
 
     a.text = document.createElement('div')
     a.text.className = 'timer__name'
@@ -170,7 +181,8 @@ function setHTML(a) {
 
     a.text.addEventListener('blur', function () {
         console.info('-blur-')
-        a.obj.name = a.text.textContent
+        // a.obj.name = a.text.textContent
+        a.rename(a.text.textContent)
     })
 
     a.timeText = document.createElement('div')

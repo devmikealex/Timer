@@ -101,6 +101,9 @@ input {
 .timer--mod .timer__startTime {
   color: #2d2d2d;
 }
+.timer--load {
+  background-color: #dcffdb;
+}
 .timer__timeText {
   font-size: 2rem;
   font-family: 'Consolas', Courier, monospace;
