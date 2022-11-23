@@ -72,7 +72,7 @@ export default class Timer {
         this.obj.startTime = new Date()
         this.update()
         this.container.classList.remove('timer--mod-final')
-        this.alarmDone = false
+        this.obj.alarmDone = false
     }
     focusName() {
         this.text.focus()
@@ -120,12 +120,12 @@ export default class Timer {
                 newTime.getTime()) /
                 1000
         )
-        if (!this.alarmDone) {
+        if (!this.obj.alarmDone) {
             if (sec > 0) {
                 // this.container.classList.remove('timer--mod-final')
                 return secToText(sec)
             } else {
-                this.alarmDone = true
+                this.obj.alarmDone = true
                 this.container.classList.add('timer--mod-final')
                 alarmAudio.play()
             }
