@@ -1,4 +1,52 @@
 /**
+ * Конвертирует текст в количество секунд
+ * @param {string} text Таймкод вида '00:00:00:00'
+ * @returns {number} Количество секунд
+ */
+function textToSec(text) {
+    console.info(`FUNC textToSec (${text})`)
+
+    const timeCodeArr = text.split(':')
+    console.log("🚀 ~ file: utils.js ~ line 9 ~ textToSec ~ timeCodeArr", timeCodeArr)
+    const len = timeCodeArr.length
+    let sec=0
+    const a = [1, 60, 3600, 86400]
+
+    const b = (i) => {
+        sec += +timeCodeArr[len-1-i] * a[i]
+        return sec
+    }
+
+    for (let i = 0; i < len; i++) {
+        sec = b(i)
+        console.info("🚀 ~ utils.js ~ textToSec ~ SEC", sec)
+        // console.log(secToText(sec))
+    }
+
+    // // sec = +timeCodeArr[len-1]
+    // sec = b(0)
+    // console.log("🚀 ~ file: utils.js ~ line 14 ~ textToSec ~ sec", sec)
+    // console.log(secToText(sec))
+    
+    // sec = b(1)
+    // // sec += +timeCodeArr[len-2] * 60
+    // console.log("🚀 ~ file: utils.js ~ line 14 ~ textToSec ~ sec", sec)
+    // console.log(secToText(sec))
+
+    // sec = b(2)
+    // // sec += +timeCodeArr[len-3] * 3600
+    // console.log("🚀 ~ file: utils.js ~ line 14 ~ textToSec ~ sec", sec)
+    // console.log(secToText(sec))
+
+    // sec = b(3)
+    // // sec += +timeCodeArr[len-4] * 86400
+    // console.log("🚀 ~ file: utils.js ~ line 14 ~ textToSec ~ sec", sec)
+    // console.log(secToText(sec))
+
+    return sec
+}
+
+/**
  * Конвертирует секунды в привычный вид времени
  * @param {number} seconds Количество секунд
  * @returns {string} Строка вида '00:00'
@@ -17,7 +65,7 @@ function secToText(seconds) {
     }
     if (days) {
         // daysString = String(days).padStart(2, '0') + ':'
-        daysString = days + ':'
+        daysString = days + 'd '
     }
     const out = `${daysString}${hrsString}${String(min).padStart(2, '0')}:${String(
         sec
@@ -45,4 +93,4 @@ function *getID() {
  */
 const genGetID = getID()
 
-export default { secToText, genGetID }
+export default { secToText, textToSec, genGetID }

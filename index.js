@@ -1,6 +1,6 @@
 import Timer from './Timer.js'
 import Utils from './utils.js'
-const { secToText } = Utils
+const { secToText, textToSec } = Utils
 
 // document.body.addEventListener('click', (e) => {
 //     const tag = e.target.tagName
@@ -25,6 +25,10 @@ const btnAddNew = document.getElementById('btn-add-new')
 btnAddNew.addEventListener('click', addNew)
 const btnAddNewTimer = document.getElementById('btn-add-new-timer')
 btnAddNewTimer.addEventListener('click', () => addNewTimer())
+
+const inpTimecode = document.getElementById('inp-timecode')
+const btnAddNewTimecode = document.getElementById('btn-add-new-timecode')
+btnAddNewTimecode.addEventListener('click', () => addNewTimer(textToSec(inpTimecode.value)))
 
 let loadTimers = localStorage.getItem('timers')
 let timers = []
@@ -55,6 +59,11 @@ for (let i = 10; i < 190; i += 10) {
     tools.appendChild(btn)
 }
 
+// textToSec('59')
+// textToSec('00:25')
+// textToSec('37:10')
+// textToSec('05:48:34')
+// textToSec('02:05:48:34')
 timer()
 setInterval(timer, 1000)
 
@@ -65,6 +74,9 @@ function timer() {
     timers.forEach((e) => {
         e.update()
     })
+    const time = document.querySelector('div.timer:nth-child(1) > div:nth-child(2)').textContent
+    const name = document.querySelector('div.timer:nth-child(1) > div:nth-child(1)').textContent
+    document.title = `${time} ${name} - Timer`
 }
 
 function saveStorage() {
