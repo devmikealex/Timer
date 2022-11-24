@@ -11,13 +11,16 @@
 <body>
     <div class="container">
         <div id="tools" class="tools">
-            <button id="btn-save" class="button tools__button" title="Сохранить настройки">Save</button>
-            <button id="btn-delete" class="button tools__button">Clear</button>
-            <button id="btn-add-new" class="button tools__button">Add</button>
-            <button id="btn-add-new-timer" class="button tools__button">Add timer 5s</button>
+            <button id="btn-save" class="button tools__button" title="Save settings (alt/ctrl)">
+                <img class="button__icon button__icon--pos" src="./images/save.png" alt=""> Save</button>
+            <button id="btn-delete" class="button tools__button" title="Delete settings">
+                <img class="button__icon button__icon--pos" src="./images/delete.png" alt=""> Clear</button>
+            <button id="btn-add-new" class="button tools__button" title="Add stopwatch">
+                <img class="button__icon button__icon--pos" src="./images/stopwatch.png" alt=""> Add</button>
+            <button id="btn-add-new-timer" class="button button--test" title="for the test">Add timer 5s</button>
             <br>
             <input id="inp-timecode" type="text" placeholder="00:00:00" value="15:00">
-            <button id="btn-add-new-timecode" class="button tools__button--mod">Add</button>
+            <button id="btn-add-new-timecode" class="button tools__button--mod" title="Add timer">Add</button>
             <br>
         </div>
         <div class="date-clock"><span id="clock">00:00</span><span id="date">***</span></div>

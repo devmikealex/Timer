@@ -29,11 +29,19 @@ input {
   border-radius: 8px;
   cursor: pointer;
 }
+.button--test {
+  font-size: 0.7rem;
+  background-color: #434c6c;
+  color: #8494ce;
+}
 .button__icon {
   width: 20px;
   position: relative;
   top: 3px;
   right: 4px;
+}
+.button__icon--pos {
+  top: 1px;
 }
 .button:hover {
   background-color: #035e89;
