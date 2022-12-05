@@ -35,6 +35,7 @@ export default class Timer {
         obj.forward = obj.forward ?? true
         obj.endTimeSec = +obj.endTimeSec ?? 0
         obj.alarmDone = obj.alarmDone ?? false
+        obj.alarmDisabled = obj.alarmDisabled ?? true
         // obj.endTimeSec += 1
         this.obj = obj
         this.id = genGetID.next().value
@@ -64,7 +65,7 @@ export default class Timer {
             this.timeText.textContent = this.getTimeStringBack()
         }
     }
-    rename (newName) {
+    rename(newName) {
         this.obj.name = newName
         this.container.classList.remove('timer--load')
     }
@@ -72,7 +73,9 @@ export default class Timer {
         this.obj.startTime = new Date()
         this.update()
         this.container.classList.remove('timer--mod-final')
+        this.timeText.classList.remove('blink')
         this.obj.alarmDone = false
+        this.obj.alarmDisabled = true
     }
     focusName() {
         this.text.focus()
@@ -126,7 +129,9 @@ export default class Timer {
                 return secToText(sec)
             } else {
                 this.obj.alarmDone = true
+                this.obj.alarmDisabled = false
                 this.container.classList.add('timer--mod-final')
+                this.timeText.classList.add('blink')
                 alarmAudio.play()
             }
         }
@@ -151,6 +156,11 @@ function onClickToTop(evnt, item) {
     window.moveTimerToTop(item.id)
 }
 
+function onClickRemoveBlink(evnt, item) {
+    evnt.target.classList.remove('blink')
+    item.obj.alarmDisabled = true
+}
+
 /**
  * Создание HTML элементов для таймера
  * @param {object} a Объект для хранения новых элементов HTML
@@ -158,12 +168,13 @@ function onClickToTop(evnt, item) {
 function setHTML(a) {
     a.container = document.createElement('div')
     let modClass = ''
-    if (a.obj.name==='LOAD') {
+    if (a.obj.name === 'LOAD') {
         modClass = ' timer--load'
     }
     if (!a.obj.forward) {
         modClass += ' timer--mod'
     }
+    if (a.obj.alarmDone) modClass += ' timer--mod-final'
     a.container.className = 'timer' + modClass
 
     a.text = document.createElement('div')
@@ -188,6 +199,8 @@ function setHTML(a) {
     a.timeText = document.createElement('div')
     a.timeText.className = 'timer__timeText'
     a.timeText.textContent = '00:00'
+    a.timeText.onclick = (evnt) => onClickRemoveBlink(evnt, a)
+    if (!a.obj.alarmDisabled) a.timeText.classList.add('blink')
 
     a.timeStartText = document.createElement('div')
     a.timeStartText.className = 'timer__startTime'
