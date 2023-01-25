@@ -5,6 +5,7 @@
 }
 body {
   overflow-x: hidden;
+  font-family: 'Consolas', Courier, monospace;
 }
 input {
   padding: 3px;
@@ -114,7 +115,6 @@ input {
 }
 .timer__timeText {
   font-size: 2rem;
-  font-family: 'Consolas', Courier, monospace;
   margin: 0 2rem;
 }
 .timer__name {

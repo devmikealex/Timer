@@ -1,34 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="./images/time.png">
-</head>
-<body>
-    <div class="container">
-        <div id="tools" class="tools">
-            <button id="btn-save" class="button tools__button" title="Save settings (alt/ctrl)">
-                <img class="button__icon button__icon--pos" src="./images/save.png" alt=""> Save</button>
-            <button id="btn-delete" class="button tools__button" title="Delete settings">
-                <img class="button__icon button__icon--pos" src="./images/delete.png" alt=""> Clear</button>
-            <button id="btn-add-new" class="button tools__button" title="Add stopwatch">
-                <img class="button__icon button__icon--pos" src="./images/stopwatch.png" alt=""> Add</button>
-            <button id="btn-add-new-timer" class="button button--test" title="for the test">Add timer 5s</button>
-            <br>
-            <input id="inp-timecode" type="text" placeholder="00:00:00" value="15:00">
-            <button id="btn-add-new-timecode" class="button tools__button--mod" title="Add timer">Add</button>
-            <br>
-        </div>
-        <div class="date-clock"><span id="clock">00:00</span><span id="date">***</span></div>
-        <div id="root">
-        </div>
-    </div>
 
-    <!-- <div id="root2"></div> -->
-    <script type="module" src="index.js"></script>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#25aa37" />
+	<title>Timer</title>
+	<link rel="manifest" href="manifest.json">
+	<link rel="apple-touch-icon" href="./images/icons/app-icon-192-192.png">
+	<link rel="icon" type="image/png" href="./images/time.png">
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div id="tools" class="tools">
+			<button id="btn-save" class="button tools__button" title="Save settings (alt/ctrl)">
+				<img class="button__icon button__icon--pos" src="./images/save.png" alt=""> Save</button>
+			<button id="btn-delete" class="button tools__button" title="Delete settings">
+				<img class="button__icon button__icon--pos" src="./images/delete.png" alt=""> Clear</button>
+			<button id="btn-add-new" class="button tools__button" title="Add stopwatch">
+				<img class="button__icon button__icon--pos" src="./images/stopwatch.png" alt=""> Add</button>
+			<button id="btn-add-new-timer" class="button button--test" title="for the test">Add timer 5s</button>
+			<br>
+			<input id="inp-timecode" type="text" placeholder="00:00:00" value="15:00">
+			<button id="btn-add-new-timecode" class="button tools__button--mod" title="Add timer">Add</button>
+			<br>
+		</div>
+		<div class="date-clock"><span id="clock">00:00</span><span id="date">***</span></div>
+		<div id="root">
+		</div>
+	</div>
+
+	<!-- <div id="root2"></div> -->
+	<script type="module" src="index.js"></script>
+	<script src="sw-reg.js"></script>
 </body>
+
 </html>

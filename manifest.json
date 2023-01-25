@@ -1,0 +1,33 @@
+{
+    "name": "Timer & Stopwatch",
+    "short_name": "Timer",
+    "theme_color": "#25aa37",
+    "background_color": "#00360c",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "./index.html",
+    "scope": "./",
+    "icons": [
+        {
+            "src": "./images/icons/app-icon-96-96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "./images/icons/app-icon-192-192.png",
+            "sizes": "196x196",
+            "type": "image/png"
+        },
+        {
+            "src": "./images/icons/app-icon-196-196.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./images/icons/app-icon-512-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
