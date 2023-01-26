@@ -1,4 +1,4 @@
-const cacheName = 'timer-v006'
+const cacheName = 'timer-v001'
 const assets = [
     './',
     // './manifest.json',
