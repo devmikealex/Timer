@@ -5,7 +5,7 @@
 }
 body {
   overflow-x: hidden;
-  font-family: 'Consolas', Courier, monospace;
+  font-family: 'Consolas', monospace;
 }
 input {
   padding: 3px;
@@ -19,7 +19,7 @@ input {
   align-items: stretch;
   width: 100vw;
   height: 100vh;
-  background-color: #313131;
+  background-color: #696e00;
 }
 .button {
   background-color: #0a80b7;

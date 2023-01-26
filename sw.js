@@ -1,14 +1,14 @@
-const cacheName = 'timer-v001'
+const cacheName = 'timer-v006'
 const assets = [
     './',
-    './manifest.json',
+    // './manifest.json',
     './index.html',
     './style.css',
     './index.js',
     './utils.js',
     './Timer.js',
     './sw-reg.js',
-    './sw.js',
+    // './sw.js',
     './images/delete.png',
     './images/pin.png',
     './images/reset.png',
@@ -63,7 +63,7 @@ self.addEventListener('fetch', (event) => {
 
 async function cacheFirst(request, options) {
     const cached = await caches.match(request, options)
-    console.log('[SW] << match', cached?.url)
+    console.log('[SW] << match', cached?.url, cached ? '' : '!!! ' + request.url)
     return cached ?? (await fetch(request))
 }
 
