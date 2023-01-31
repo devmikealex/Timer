@@ -76,9 +76,14 @@ timer()
 setInterval(timer, 1000)
 
 function timer() {
-    const noew = new Date()
-    clock.textContent = noew.toTimeString().slice(0, 5) + ' '
-    date.textContent = noew.toLocaleDateString('ru', dateOptions)
+    const newTime = new Date()
+    clock.textContent = newTime.toTimeString().slice(0, 5) + ' '
+    // const a = newTime.toLocaleDateString('ru', dateOptions)
+    const dateNoWrap = newTime
+        .toLocaleDateString('ru', dateOptions)
+        .replace(/([^,])(\s)/g, '$1&nbsp;') // замена всех пробелов на &nbsp; кроме того, что с запятой ', '
+    date.innerHTML = dateNoWrap
+
     timers.forEach((e) => {
         e.update()
     })
@@ -97,7 +102,7 @@ function timer() {
  */
 function saveStorage(event, copy = false) {
     console.info('FUNC save')
-    const alt = event.getModifierState("Alt")
+    const alt = event.getModifierState('Alt')
     console.info('mod ALT', alt)
     const t_filterd = timers.filter((e) => e.obj.name !== 'LOAD')
     const a = t_filterd.map((e) => e.save())
@@ -107,7 +112,7 @@ function saveStorage(event, copy = false) {
         navigator.clipboard.writeText(json)
         console.log('SAVE to clipboard')
     } else {
-        const control = event.getModifierState("Control")
+        const control = event.getModifierState('Control')
         console.info('mod control', control)
         if (control) {
             console.log('Get data from input for save')
