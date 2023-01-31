@@ -67,6 +67,8 @@ async function cacheFirst(request, options) {
     return cached ?? (await fetch(request))
 }
 
+// PWA Tutorial for Beginners #17 - Cache Versioning
+// https://www.youtube.com/watch?v=g9LfyCZjeKI
 // Что такое PWA. Как работают Service Workers
 // https://www.youtube.com/watch?v=ifroMW_F4Sc
 
